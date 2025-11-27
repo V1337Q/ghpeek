@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -e
+
+INSTALL_DIR="$HOME/.local/share/ghpeek"
+VENV="$INSTALL_DIR/.venv"
+
+# Ensure the project directory exists
+mkdir -p "$INSTALL_DIR"
+
+# Verify installation
+if [ ! -f "$INSTALL_DIR/ghpeek.py" ]; then
+    echo "❌ ghpeek not installed."
+    echo "Run the installer:"
+    echo "curl -s https://raw.githubusercontent.com/V1337Q/ghpeek/main/install.sh | bash"
+    exit 1
+fi
+
+# Create virtual environment if missing
+if [ ! -d "$VENV" ]; then
+    echo "🔧 Creating environment..."
+    python3 -m venv "$VENV"
+fi
+
+source "$VENV/bin/activate"
+
+# Install deps only once
+if [ ! -f "$VENV/.deps_installed" ]; then
+    echo "📦 Installing Python dependencies..."
+    pip install --upgrade pip wheel setuptools
+    pip install -r "$INSTALL_DIR/requirements.txt"
+
+    echo "🧩 Installing Chromium..."
+    playwright install chromium
+
+    touch "$VENV/.deps_installed"
+fi
+
+python "$INSTALL_DIR/ghpeek.py" "$@"
