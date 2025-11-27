@@ -13,7 +13,7 @@ It shows:
 
 ---
 
-## 🚀 Quick Install (Recommended)
+## 🚀 Quick Install
 
 ```bash
 curl -s https://raw.githubusercontent.com/V1337Q/ghpeek/main/install.sh | bash
