@@ -25,7 +25,7 @@ curl -s https://raw.githubusercontent.com/V1337Q/ghpeek/main/install.sh | bash
 
 ## NOTICE!
 
-Don't forget to export your github token in order to render the contribution graph and other graphics.
+Don't forget to export your `github token` in order to render the contribution graph and other graphics.
 
 In your terminal:
 
